@@ -1,0 +1,26 @@
+﻿@model GhostChat.ViewModels.RegisterVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/auth_form.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <form method="post" class="form-register" action="/Authentication/Register">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+        <input type="text" name="Username" placeholder="Username" class="form-control" />
+        <input type="email" name="Email" placeholder="Email address" class="form-control" />
+        <input type="password" name="Password" placeholder="Password" class="form-control" />
+        <input type="password" name="PasswordRetry"  placeholder="Retry password" class="form-control last-input" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+    </form>
+</body>
+</html>
