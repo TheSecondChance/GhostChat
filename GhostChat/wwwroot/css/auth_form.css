@@ -41,6 +41,15 @@ input {
     border-bottom-left-radius: 0;
 }
 
+a {
+    display: block;
+    margin-top: 20px;
+}
+
+a:hover, a:active {
+    text-decoration: none !important;
+}
+
 .form-register .last-input {
     margin-bottom: 20px;
     border-top-left-radius: 0;

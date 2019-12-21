@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using GhostChat.BusinessLogic;
 using GhostChat.Data;
 using GhostChat.Data.Models;
 using GhostChat.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Session;
 
 namespace GhostChat.Controllers
 {
@@ -23,6 +19,7 @@ namespace GhostChat.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.Title = "Register";
             return View();
         }
 
@@ -43,7 +40,7 @@ namespace GhostChat.Controllers
 
                         repository.Add(user);
                         HttpContext.Session.SetString("User", user.Username);
-                        return RedirectToAction("Site", "Home");
+                        return RedirectToAction("Site", "Main");
                     }
                 }
             }

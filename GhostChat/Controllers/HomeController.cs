@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using GhostChat.BusinessLogic;
 using GhostChat.Data;
 using GhostChat.Data.Models;
@@ -22,6 +19,7 @@ namespace GhostChat.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.Title = "Login";
             return View();
         }
 
@@ -38,17 +36,12 @@ namespace GhostChat.Controllers
                     if (PasswordHashing.PasswordVerify(loginData.Password, hashToVerify))
                     {
                         HttpContext.Session.SetString("User", loginData.Username);
-                        return RedirectToAction("Site", "Home");
+                        return RedirectToAction("Site", "Main");
                     }
                 }
             }
 
             return RedirectToAction("Index", "Home");
-        }
-
-        public IActionResult Site()
-        {
-            return View();
         }
     }
 }
