@@ -28,7 +28,8 @@ namespace GhostChat
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSession();
-            services.AddMvc();         
+            services.AddMemoryCache();
+            services.AddMvc();    
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("SQLiteConnection")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -41,9 +42,9 @@ namespace GhostChat
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSession();
-            app.UseMvcWithDefaultRoute();
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseMvcWithDefaultRoute();          
             app.UseStatusCodePages();
         }
     }

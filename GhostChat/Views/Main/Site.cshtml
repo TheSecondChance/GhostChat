@@ -1,11 +1,38 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/css/main.css" rel="stylesheet" />
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h1 style="margin-left: 40px">Welcome to GhostChat, @ViewBag.username</h1>
+<div class="container">
+    <h1 class="text-center">Welcome to GhostChat, @ViewBag.username</h1>
+    <div class="row">
+        <div class="friends-sidebar col-md-4 col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr><th>Friends list</th></tr>
+                </thead>
+                <tr><td>User1</td></tr>
+                <tr><td>User2</td></tr>
+                <tr><td>User3</td></tr>
+                <tr><td>User4</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+                <tr><td>User5</td></tr>
+            </table>
+        </div>
+        <div class="messages-window col-md-8 col-sm-12">
+            <h1 class="text-center" style="margin-top: 50%">Messanges window</h1>
+        </div>
+    </div>
+</div>
