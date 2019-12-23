@@ -1,38 +1,33 @@
-﻿@{
+﻿@using GhostChat.Data.Models
+
+@model List<User>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/css/main.css" rel="stylesheet" />
 
 <div class="container">
-    <h1 class="text-center">Welcome to GhostChat, @ViewBag.username</h1>
+    <h1 class="text-center">Welcome to GhostChat, @ViewBag.Username</h1>
     <div class="row">
         <div class="friends-sidebar col-md-4 col-sm-12">
-            <table class="table table-bordered">
-                <thead>
-                    <tr><th>Conversations</th></tr>
-                </thead>
-                <tr><td>User1</td></tr>
-                <tr><td>User2</td></tr>
-                <tr><td>User3</td></tr>
-                <tr><td>User4</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-                <tr><td>User5</td></tr>
-            </table>
+            <div class="header">
+                Conversations
+            </div>
+            <div class="friends-list">
+                <ul>
+                    @foreach (var friend in Model)
+                    {
+                        <li>
+                            <a href="/Home/Index">
+                                <span>@friend.Username</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
         <div class="messages-window col-md-8 col-sm-12">
-            <h1 class="text-center" style="margin-top: 50%">Messanges window</h1>
+            <span>Messages window</span>
         </div>
     </div>
 </div>

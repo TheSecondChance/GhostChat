@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using GhostChat.Data;
 using GhostChat.Data.Models;
+using GhostChat.BusinessLogic;
+using System.Collections.Generic;
 
 namespace GhostChat.Controllers
 {
@@ -20,9 +22,12 @@ namespace GhostChat.Controllers
         {
             if (CurrentUser != null)
             {
-                ViewBag.username = CurrentUser.Username;
+                FriendshipManager manager = new FriendshipManager(friendships);
+
+                List<User> friends = manager.GetFriendsList(CurrentUser);
+                ViewBag.Username = CurrentUser.Username;
                 ViewBag.Title = "GhostChat";
-                return View();
+                return View(friends);
             }
 
             return RedirectToAction("Index", "Home");

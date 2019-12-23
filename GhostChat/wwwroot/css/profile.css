@@ -19,14 +19,14 @@
 }
 
 .friends-list {
-    height: 500px;
+    height: 475px;
     margin-bottom: 20px;
 }
 
 .no-friends {
     text-align: center;
     vertical-align: middle;
-    line-height: 495px;
+    line-height: 470px;
 }
 
 .list > ul {
