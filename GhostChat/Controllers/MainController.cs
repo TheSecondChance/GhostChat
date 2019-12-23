@@ -2,46 +2,36 @@
 using Microsoft.AspNetCore.Mvc;
 using GhostChat.Data;
 using GhostChat.Data.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GhostChat.Controllers
 {
-    public class MainController : Controller
+    public class MainController : BaseController
     {
-        private IRepository<User> repository;
-        public MainController(IRepository<User> repository)
-        {
-            this.repository = repository;
+        private IRepository<User> users;
+        private IRepository<Friendship> friendships;
+        public MainController(IRepository<User> users, IRepository<Friendship> friendships) : base(users)
+        {          
+            this.users = users;
+            this.friendships = friendships;
         }
 
+        [HttpGet]
         public IActionResult Site()
         {
-            string username = HttpContext.Session.GetString("User");
-
-            if (username != null)
+            if (CurrentUser != null)
             {
-                ViewBag.username = username;
+                ViewBag.username = CurrentUser.Username;
                 ViewBag.Title = "GhostChat";
                 return View();
             }
+
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
-
-        public IActionResult Users()
-        {
-            if (HttpContext.Session.GetString("User") != null)
-            {
-                string currentUser = HttpContext.Session.GetString("User");
-                List<User> users = repository.GetAll().Where(x => x.Username != currentUser).ToList();             
-                return View(users);
-            }
             return RedirectToAction("Index", "Home");
         }
     }

@@ -44,7 +44,7 @@ namespace GhostChat
 
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();          
+            app.UseMvcWithDefaultRoute(); 
             app.UseStatusCodePages();
         }
     }

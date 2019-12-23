@@ -1,0 +1,71 @@
+﻿@using GhostChat.ViewModels
+@model ProfileViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/profile.css" rel="stylesheet" />
+
+<div class="container">
+    <h1 class="text-center">Welcome to your profile page</h1>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h3 class="text-center">Profile settings</h3>
+            <div class="settings">
+
+            </div>
+            <h3 class="text-center">Incoming friend requests</h3>
+            @if (Model.FriendRequests.Count == 0)
+            {
+                @Html.Raw("<div class=\"list friend-requests no-requests\">")
+                <span>You have no friend requests</span>
+                @Html.Raw("</div>")
+            }
+            else
+            {
+                @Html.Raw("<div class=\"list friend-requests\">");
+                <ul>
+                    @foreach (var friendRequest in Model.FriendRequests)
+                    {
+                        <li>
+                            <span>From: @friendRequest.RequestingUser.Username</span>
+                            <form method="post" action="/Profile/AcceptFriendship/@friendRequest.RequestingUser.Id">
+                                <button type="submit" class="btn btn-success">Accept</button>
+                            </form>
+                            <form method="post" action="/Profile/RejectFriendship/@friendRequest.RequestingUser.Id">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                @Html.Raw("</div>")
+            }
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h3 class="text-center">Friends list</h3>
+            @if (Model.Friends.Count == 0)
+            {
+                @Html.Raw("<div class=\"list friends-list no-friends\">")
+                <span>You have no friends now :(</span>
+                @Html.Raw("</div>")
+            }
+            else
+            {
+                @Html.Raw("<div class=\"list friends-list\">")
+                <ul>
+                    @foreach (var friend in Model.Friends)
+                    {
+                        <li>
+                            <img src="~/img/avatar.png" />
+                            <span>@friend.Username</span>
+                            <form method="post" action="/Profile/RemoveFriend/@friend.Id">
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                @Html.Raw("</div>")
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@using GhostChat.ViewModels
+@using GhostChat.Data.Models
+@model UsersViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/users.css" rel="stylesheet" />
+
+<div class="container">
+    <h1 class="text-center">GhostChat Users</h1>
+    <h3 class="text-center">Find your friends to chat with</h3>
+    <div class="users-list">
+        <ul>
+            @foreach (var user in Model.OtherUsers)
+            {
+                <li>
+                    <img src="~/img/avatar.png" />
+                    <span>@user.Username</span>
+                    <form method="post" action="/Users/FriendRequest/@user.Id">
+
+                        @{
+                            Friendship userFriendship = Model.UserFriends.Where(x =>
+                            (x.RequestingUser.Id == Model.CurrentUser.Id || x.AcceptingUser.Id == Model.CurrentUser.Id)
+                            &&
+                            (x.RequestingUser.Id == user.Id || x.AcceptingUser.Id == user.Id)
+                            ).SingleOrDefault();
+                        }
+
+                        @if (userFriendship != null)
+                        {
+                            if (userFriendship.AreFriends)
+                            {
+                                <button type="button" class="btn btn-success" disabled>You are friends</button>
+                            }
+                            else
+                            {
+                                if (userFriendship.RequestingUser.Id == Model.CurrentUser.Id)
+                                {
+                                    <button type="button" class="btn btn-info" disabled>Request sent</button>
+                                }
+                                else if (userFriendship.AcceptingUser.Id == Model.CurrentUser.Id)
+                                {
+                                    <button type="button" class="btn btn-info" disabled>Request received</button>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary">Add to friends</button>
+                        }
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

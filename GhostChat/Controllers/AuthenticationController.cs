@@ -23,7 +23,7 @@ namespace GhostChat.Controllers
             return View();
         }
 
-        public IActionResult Register(RegisterVM registerData)
+        public IActionResult Register(RegisterViewModel registerData)
         {
             if (ModelState.IsValid)
             {

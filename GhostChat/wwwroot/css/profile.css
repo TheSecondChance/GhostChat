@@ -1,0 +1,58 @@
+﻿h3 {  
+    margin: 20px 0 20px 0;
+}
+
+.list {
+    width: 100%;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+}
+
+.friend-requests {
+    height: 250px;
+}
+
+.no-requests {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 245px;
+}
+
+.friends-list {
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+.no-friends {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 495px;
+}
+
+.list > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list > ul > li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+span {
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.list > ul > li > form {
+    margin-right: 30px;
+}
+
+.list > ul > li > img {
+    border-radius: 50%;
+    width: 40px;
+}

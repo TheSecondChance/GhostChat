@@ -24,7 +24,7 @@ namespace GhostChat.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(LoginVM loginData)
+        public IActionResult Index(LoginViewModel loginData)
         {
             if (ModelState.IsValid)
             {

@@ -2,7 +2,7 @@
 
 namespace GhostChat.ViewModels
 {
-    public class RegisterVM
+    public class RegisterViewModel
     {
         [Required]
         public string Username { get; set; }
