@@ -8,6 +8,8 @@ namespace GhostChat.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageRecipient> MessageRecipients { get; set; }
 
         public ApplicationContext(DbContextOptions options) : base(options) { }
     }
