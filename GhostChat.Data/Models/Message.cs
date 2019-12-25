@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GhostChat.Data.Models
 {
@@ -8,12 +7,13 @@ namespace GhostChat.Data.Models
     {
         public Guid Id { get; set; }
         public string Text { get; set; }
-        public DateTime CreationTime { get; set; }
-
-        public Guid SenderId { get; set; }
+        public DateTime CreationTime { get; set; }     
         public User Sender { get; set; }
+        public virtual List<UserMessage> UserMessages { get; set; }
 
-        public Guid RecipientId { get; set; }
-        public MessageRecipient Recipient { get; set; }
+        public Message()
+        {
+            UserMessages = new List<UserMessage>();
+        }
     }
 }

@@ -9,7 +9,7 @@
 <div class="container">
     <h1 class="text-center">Welcome to GhostChat, @ViewBag.Username</h1>
     <div class="row">
-        <div class="friends-sidebar col-md-4 col-sm-12">
+        <div class="friends-sidebar col-md-4">
             <div class="header">
                 Conversations
             </div>
@@ -17,8 +17,8 @@
                 <ul>
                     @foreach (var friend in Model)
                     {
-                        <li>
-                            <a href="/Home/Index">
+                        <li class="friend">
+                            <a href="/Main/Messages/@friend.Username">
                                 <span>@friend.Username</span>
                             </a>
                         </li>
@@ -26,8 +26,14 @@
                 </ul>
             </div>
         </div>
-        <div class="messages-window col-md-8 col-sm-12">
-            <span>Messages window</span>
+        <div class="messages col-md-8">
+            <div class="message-window">
+                <div class="empty-box">Select your friend to start chatting</div>
+            </div>
+            <form method="post" action="/Main/SendMessage" class="form-inline message-input">
+                <input type="text" name="Text" placeholder="Input your message" class="form-control mr-1" disabled>
+                <button id="send-button" class="btn btn-primary px-4" disabled>Send</button>
+            </form>
+            </div>
         </div>
-    </div>
 </div>

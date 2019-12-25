@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GhostChat.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191223163039_Messages")]
-    partial class Messages
+    [Migration("20191225064529_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,33 +45,15 @@ namespace GhostChat.Data.Migrations
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<Guid>("RecipientId");
-
-                    b.Property<Guid>("SenderId");
+                    b.Property<Guid?>("SenderId");
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipientId");
-
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("GhostChat.Data.Models.MessageRecipient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("RecipientId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipientId");
-
-                    b.ToTable("MessageRecipients");
                 });
 
             modelBuilder.Entity("GhostChat.Data.Models.User", b =>
@@ -90,6 +72,19 @@ namespace GhostChat.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("GhostChat.Data.Models.UserMessage", b =>
+                {
+                    b.Property<Guid>("MessageId");
+
+                    b.Property<Guid>("UserID");
+
+                    b.HasKey("MessageId", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserMessages");
+                });
+
             modelBuilder.Entity("GhostChat.Data.Models.Friendship", b =>
                 {
                     b.HasOne("GhostChat.Data.Models.User", "AcceptingUser")
@@ -103,22 +98,22 @@ namespace GhostChat.Data.Migrations
 
             modelBuilder.Entity("GhostChat.Data.Models.Message", b =>
                 {
-                    b.HasOne("GhostChat.Data.Models.MessageRecipient", "Recipient")
-                        .WithMany("Messages")
-                        .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("GhostChat.Data.Models.User", "Sender")
-                        .WithMany("Messages")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("SenderId");
                 });
 
-            modelBuilder.Entity("GhostChat.Data.Models.MessageRecipient", b =>
+            modelBuilder.Entity("GhostChat.Data.Models.UserMessage", b =>
                 {
-                    b.HasOne("GhostChat.Data.Models.User", "Recipient")
-                        .WithMany()
-                        .HasForeignKey("RecipientId");
+                    b.HasOne("GhostChat.Data.Models.Message", "Message")
+                        .WithMany("UserMessages")
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GhostChat.Data.Models.User", "User")
+                        .WithMany("UserMessages")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
