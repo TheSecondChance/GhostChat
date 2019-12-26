@@ -22,7 +22,7 @@ namespace GhostChat.BusinessLogic
                                                    where m.Sender.Id == user.Id && um.UserID == usersFriend.Id
                                                    select new MessagesItem
                                                    {
-                                                       Text = m.Text,
+                                                       Text = Ghost.Decrypt(m.Text, Ghost.EncryptionKey),
                                                        CreationTime = m.CreationTime,
                                                        Type = "Outgoing"
                                                    }).ToList();
@@ -32,7 +32,7 @@ namespace GhostChat.BusinessLogic
                                                    where m.Sender.Id == usersFriend.Id && um.UserID == user.Id
                                                    select new MessagesItem
                                                    {
-                                                       Text = m.Text,
+                                                       Text = Ghost.Decrypt(m.Text, Ghost.EncryptionKey),
                                                        CreationTime = m.CreationTime,
                                                        Type = "Incoming"
                                                    }).ToList();

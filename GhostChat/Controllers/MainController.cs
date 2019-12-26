@@ -6,8 +6,6 @@ using GhostChat.BusinessLogic;
 using System.Collections.Generic;
 using System;
 using GhostChat.ViewModels;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using GhostChat.ViewModels.Messages;
 
 namespace GhostChat.Controllers
@@ -17,6 +15,7 @@ namespace GhostChat.Controllers
         private IRepository<User> users;
         private IRepository<Friendship> friendships;
         private ApplicationContext dbContext;
+
         public MainController(IRepository<User> users, IRepository<Friendship> friendships, ApplicationContext context) : base(users)
         {          
             this.users = users;
@@ -83,7 +82,7 @@ namespace GhostChat.Controllers
                 {
                     Message message = new Message
                     {
-                        Text = messageViewModel.Text,
+                        Text = Ghost.Encrypt(messageViewModel.Text, Ghost.EncryptionKey),
                         CreationTime = DateTime.Now,
                         Sender = CurrentUser,
                     };
